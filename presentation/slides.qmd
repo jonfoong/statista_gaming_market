@@ -1,0 +1,240 @@
+---
+title: "Statista presentation"
+
+author: Jonah Foong
+date: "11 April 2025"
+format: 
+  revealjs:
+    smaller: false
+    scrollable: true
+    reference-location: document
+    embed-resources: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Outline
+
+## Gaming market: *a* definition
+
+<!--
+- point is to have principled, defensible definition, not the correct one
+- narrow enough to enable measurement
+-->
+
+- Comprises any direct exchange of goods and services of video games and associated peripherals as end product
+- Examples include PC, mobile, console games, associated hardware, subscriptions, etc
+- Does not include streaming and broadcasting like esports <!--with more indirect revenue streams-->
+  
+<!--
+where does revenue come from?
+- manufacturers selling consoles and peripherals to gamers
+- manufacturers selling games to gamers
+- manufacturers selling ad space (esp for free mobile and online games)
+- gamers purchasing items in game (skins, QOL improvements)
+- does not include streaming and esports
+-->
+  
+## Gaming market segments
+
+- singular transactions
+  - hardware (consoles, peripherals)
+  - games (PC, console, mobile)
+
+- live transactions
+  - in game purchases
+  - ad monetization (freemium models)
+  - subscriptions and DLCs
+ 
+## Trends and developments
+
+- automated approach
+- searched 'gaming market trends' on google and scraped the first 30 news articles
+- generated summaries using GPT API
+- code and 
+
+## Trends and developments {.smaller}
+  
+```{python}
+#| output: asis
+
+import pickle
+
+with open("../scrape/assets/fin_summaries.pkl", "rb") as f:
+  summary = pickle.load(f)
+
+print(summary[0]['summary'])
+
+```
+
+
+## Market size estimation
+
+- values for CY 2024
+- bottom up estimation approach using a combination of available data and assumptions where necessary
+- market size is aggregate of 
+  - hardware sales of major products (PS, Xbox, switch, steam deck, VR)
+  - software sales (console and PC games, DLC)
+  - in game purchases (mostly PC)
+  - mobile games (download and ad revenue)
+
+## Market size estimation: Console/PC
+
+Hardware:
+
+- We take 2024 sales of consoles sourced from financial statements totalling 16.7bn
+  - figure includes 1 extra controller/unit to account for peripherals
+
+Title sales + subscription:
+
+- Title sales across all platforms ~ 28.5bn
+- Subscriptions from PS and xbox ~ 8.78bn
+
+To get market estimation for console/pc market, aggregate estimates and apply 10% factor to account for misc/minor markets
+- total is ~ 59.4bn
+
+## Market size estimation: Mobile
+
+- take total top 10 revenue games from AppMagic ~ 12.04bn
+- assuming a market share of 15% for the top 10 games, we scale this to 100% to reach ~80.3bn
+  - 15% is taken from xxx
+
+- Total market size is thus 59.4bn + 80.3bn = 139.7bn
+
+## Growth estimation: assumptions {.smaller}
+
+- estimate growth for next year (2025)
+- assume market is only consumer led; consumers make consumption decisions regardless of what producers put in the market
+- growth as a function of consumer demographic changes
+  - population growth; increase in 'gaming' cohort
+  - increase in accessibility (consumption expenditure, internet penetration, etc)
+  - shifts in consumer habits (consumers move spending from one category to another)
+- use market leaders such as USA as representative of growth in PC/console markets, and China for mobile markets
+
+## Growth estimation: PC and Console (USA)
+
+- for PC/console markets, we take growth as function of population growth, projected expenditure growth, and change in consumer habits
+- use population growth as proxy for new entrants into gaming market (1%)
+- consumer expenditure growth projected at 3%; assuming this as baseline consumption figure for all discretionary spending incl gaming
+- assume shifts in consumer preferences; consumers move spending from toys and publishing markets to games at 0.3% each
+- projected growth = (3 + 0.3 + 0.3) * 1.01 = 3.64%
+
+## Growth estimation: mobile markets (China)
+
+- for mobile markets, growth as fn of expenditure growth and internet penetration
+- 1.2% increase in internet penetration China
+- 5.1% increase in consumer expenditure
+- we assume effect of internet penetration is scaled by a declining exponent to reflect weaker market potential in rural areas
+  - assuming $P=0.8$, where $P$ is current internet penetration rates, effect of internet penetration $I=1.2^{1-0.8} - 1$
+  - assume also negligible cost for consumers; consumers do not shift spending in other markets to mobile gaming
+  - mobile market growth thus calculated as $(1.2^{0.2} - 1) + 5.1 ~ 5.14$
+
+Final growth figure calculated as 3.64*(share of pc and console market) + 5.14*(share of mobile market) ~ 4.5%
+
+## Country comparison: China vs US
+
+- comparison of consumption, production, and future outlook
+  
+- Consumer markets:
+  - US is dominant player in gaming market, with revenue driven mostly by traditional gaming media (PC, consoles)
+  - Chinese market dominated by mobile gaming due to low cost and easy access
+  
+- Game production:
+  - US strong record of video game development
+  - China upcoming market in game development, moving from consumer to producer. Recent titles like Black Myth Wukong. Traditionally mobile games oriented to local market, like Honor of Kings, Genshin Impact
+  - Mirrors China's shift from consumer of xx products to producer 
+
+- Future outlook:
+  - China economic slowdown may dampen already low demand for high value consumer electronics like consoles
+  - Expect mobile gaming market to thrive
+  - Stagnating population growth drives economics pressures xx
+  - US:
+    - losing dominance on producing titles, no longer enjoy monopoly on human capital
+
+## Scenario Analysis: global trade war {.smaller}
+
+- US import tariffs and reciprocal measures by trade partners for the 
+- Direct effects:
+  - lower console sales as firms pass cost to consumers (global)
+  - reduction in AAA gaming titles as studios become more risk-averse
+  - delayed launch of new products (switch 2, gaming titles) as firms reassess growth strategies
+- Indirect effects:
+  - increased cost of living curbs consumer spending on discretionary items like games
+  - consumer shift to gaming alternatives with low entry costs, like mobile or freemium games
+
+- Market impact:
+  - overall near term shrink in market size, though likely to revert to growth trends as markets and consumers adjust
+  - shifts in gaming business model from costly titles to freemium content
+
+# Thank you
+
+
+## Market estimation rough calculations
+
+Estimated 
+
+2024
+PS sales: 20.2m * rrp ($500 avg) = $10.1bn
+- each console 1 extra controller = 20.2m*$75 = 1.515bn
+xbox sales = 2.7m * $400 = 1.08bn
+- controller = 0.1215bn
+switch sales: 11.5m*$300 = 3.45bn
+- joy-con: 11.5m/2 * $80 = 0.46bn
+steam deck sales: 1.5m*500 = 0.75bn
+
+total hardware sales: 10.1 + 1.515 + 1.08 + 0.1215 + 3.45 + 0.46 = 16.73
+
+game sales:
+
+switch games 2025 q1-q3 (only those with more than a million title sales):
+- (617 + 538 + 391 + 263 + 208 + 207 + 206 + 184 + 180 + 166 + 146 + 109)*10000*45 = 1.45bn
+- scale to 4qs = 1.93bn (assuming 90% of market share)
+- scale to 100% market share = 1.93*10/9 = 2.14bn
+
+playstation games
+- ps4 + 5 software sales: (72.6 + 53.6 + 77.7 + 95.9)*70/1000 = 21bn
+
+xbox games
+- could not find sales figures
+- approximate from ps data
+  - games to consoles ratio for ps: 14.84
+  - take 5% away due to PS exclusive games: 14.1
+  - 2.7*14.1*70/1000 = 2.67bn
+
+pc games
+- steam takes 75% of market share, we scale this to 100%
+- valve does not publish data since it is privately owned
+- 13 mths 1.7m new players, $20m in game transactions, $73m games+DLC
+- concurrent is 40m
+- assuming new and current players have same consumption habits, then total revenue from in game + game purchases across whole market = (93*40/1.7)*(12/13)*(4/3)/1000 = 2.69bn
+
+total gaming titles = 2.14 + 21 + 2.67 + 2.69 = 28.5
+
+playstation network: 129m * $60/year = 7.74bn
+xbox = xbox sales/ps sales * ps network = (2.7/20.2)*7.74bn = 1.04bn
+
+total ps + xbox subscriptions = 8.78bn
+
+
+mobile games
+- top 10 games from AppMagic (rev in bn):
+  - 1.87 + 1.58 + 1.46 + 1.19 + 1.18 + 1.15 + 1.08 + 1 + 0.8 + 0.73 = 12.04bn
+  - assuming top 10 games account for 15%, 100% = 12.04*100/15 = 80.27bn
+
+Total revenues: 16.73 + 2.14 + 21 + 2.67 + 2.69 + 80.27 = 125.5bn
+
+<!--
+```{python}
+
+ps_hardware_fy = [7.8, 11.5, 19.1, 20.8] # 2020-2023
+ps_software_fy = [165.6, 303.2, 264.2, 286.4] # 2020-2023
+
+steam_users = [24.8, 27.4, 30, 33, 40] # 2020-2024
+
+nintendo_yoy_fy = [12.1, 16, 14, 12, 11] # 2020-2024
+
+
+```
+
+-->
